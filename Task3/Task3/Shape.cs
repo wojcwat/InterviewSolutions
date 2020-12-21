@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Task3
 {
-    class Shape
+    abstract class Shape
     {
         protected double area;
 

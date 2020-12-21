@@ -6,6 +6,7 @@ namespace Task3
 {
     class AreaComparer : IFigureComparer
     {
+        //Returns -1 if first object has bigger area, 1 if second, 0 if objects are equal
         public int Compare(object obj1, object obj2)
         {
             try
