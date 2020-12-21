@@ -23,7 +23,7 @@ namespace Task5
         public double? Area { get; set; }
         [DataMember(Name = "latlng")]
         //Changed to nullable
-        public double?[] LatLng { get; set; } = { 0, 0 };
+        public double?[] LatLng { get; set; } 
 
         [DataMember(Name = "currencies")]
         public string[] Currencies { get; set; }
