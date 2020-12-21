@@ -26,7 +26,6 @@ namespace Task4
                 settings.Indent = true;
                 using (XmlWriter writer = XmlWriter.Create(sw,settings))
                 {
-                    
                     xmlSerializer.Serialize(writer, logEntry); 
                     serializedLogEntry = sw.ToString(); 
                 }
