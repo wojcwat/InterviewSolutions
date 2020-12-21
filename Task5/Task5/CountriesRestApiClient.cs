@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Runtime.Serialization.Json;
 using System.Text;
@@ -14,23 +15,14 @@ namespace Task5
         {
             var query = $"name/{countryName}";
             var countries = await GetData<CountryDto[]>(query);
-            var filteredCountries = new List<CountryDto>();
 
            
             if (countries.Length == 0)
             {
                 throw new Exception($"Nie udało się odnaleźć informacji na temat państwa: {countryName}.");
             }
-
-            foreach (var i in countries)
-            {
-                if (i.Name.Contains(countryName, StringComparison.CurrentCultureIgnoreCase))
-                {
-                    filteredCountries.Add(i);
-                }
-            }
-
-            return filteredCountries.ToArray();
+            //return only countries that contain countryName in their Name(excluding altSpellings)
+            return countries.Where(x=> x.Name.Contains(countryName, StringComparison.CurrentCultureIgnoreCase)).ToArray();
         }
 
         private async Task<T> GetData<T>(string query)
