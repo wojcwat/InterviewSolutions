@@ -33,7 +33,7 @@ namespace Task2
                 List<char> FileContents = new List<char>();
                 try
                 {
-                    using (var sr = new StreamReader(filePath))
+                    using (var sr = File.OpenText(filePath))
                     {
                         while (sr.Peek() >= 0)
                             FileContents.Add(Convert.ToChar(sr.Read()));
@@ -44,14 +44,13 @@ namespace Task2
                 {
                     Console.WriteLine("Cannot read file!");
                     Console.WriteLine(ex.Message);
-                    Console.ReadKey();
+                    Environment.Exit(1);
                 }
                 catch (NullReferenceException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    Console.ReadKey();
+                    Environment.Exit(1);
                 }
-
 
                 return FileContents;
             }
@@ -59,6 +58,7 @@ namespace Task2
 
         public static class CharacterOperations
         {
+            //Counts number of ocurrences and percentage value for every character read from text file
             public static List<CharacterData> GetCharacterData(List<char> characters)
             {
                 List<CharacterData> CharData = new List<CharacterData>();
@@ -103,12 +103,15 @@ namespace Task2
             string filePath;
             Console.Write("Provide file path: ");
             filePath = Console.ReadLine();
+
             Console.Clear();
             List<char> fileContents = FileOperations.ReadFromTextFile(filePath);
             List<CharacterData> charData = CharacterOperations.GetCharacterData(fileContents);
             CharacterOperations.DisplayCharacterData(charData);
 
             char pressedButton = '\0';
+
+            //Main loop (used to present features in easy way)
             while (pressedButton!= 'q')
             {
                 Console.Clear();
